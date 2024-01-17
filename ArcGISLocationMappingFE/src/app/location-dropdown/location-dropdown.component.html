@@ -1,0 +1,11 @@
+<!-- <select>
+  <option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</option>
+</select> -->
+
+<select [(ngModel)]="selectedLocationId" (ngModelChange)="onLocationSelected($event)">
+  <option value="" disabled>Please select</option>
+  <option *ngFor="let location of locations" [value]="location.id">{{ location.name }}</option>
+</select>
+<br>
+<br>
+<button (click)="onRandomize()">Randomize</button>

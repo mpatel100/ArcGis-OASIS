@@ -1,0 +1,5 @@
+This is the front end portion of the ArcGis POC project - communicates with the Java backend and DB which are both located in ArcGISLocationMappingBE Repo 
+
+Run npm i before starting 
+
+run npm start to run application

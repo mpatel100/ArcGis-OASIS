@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.6</version>
+    </parent>
+
+    <groupId>GISApplication</groupId>
+    <artifactId>GISApplication</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>GISApplication</name>
+
+    <properties>
+        <java.version>17</java.version>
+        <arcgis.version>200.2.0</arcgis.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>arcgis</id>
+            <url>https://esri.jfrog.io/artifactory/arcgis</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Spring Boot Starter Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Data JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Microsoft SQL Server JDBC Driver -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>8.2.2.jre11</version>
+        </dependency>
+
+        <!-- ArcGIS dependencies -->
+        <dependency>
+            <groupId>com.esri.arcgisruntime</groupId>
+            <artifactId>arcgis-java</artifactId>
+            <version>${arcgis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esri.arcgisruntime</groupId>
+            <artifactId>arcgis-java-jnilibs</artifactId>
+            <version>${arcgis.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.esri.arcgisruntime</groupId>
+            <artifactId>arcgis-java-resources</artifactId>
+            <version>${arcgis.version}</version>
+            <type>zip</type>
+        </dependency>
+        <!-- HTTP client -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.13</version>
+		</dependency>
+		
+		<!-- JSON Processing -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.3</version>
+		</dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.esri.arcgisruntime</groupId>
+                                    <artifactId>arcgis-java-jnilibs</artifactId>
+                                    <version>${arcgis.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${user.home}/.arcgis/${arcgis.version}</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.esri.arcgisruntime</groupId>
+                                    <artifactId>arcgis-java-resources</artifactId>
+                                    <version>${arcgis.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${user.home}/.arcgis/${arcgis.version}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
